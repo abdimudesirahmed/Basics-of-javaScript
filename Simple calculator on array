@@ -1,0 +1,25 @@
+ 
+function calculator(operator, num1, num2) {
+  switch (operator) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case '*':
+      return num1 * num2;
+    case '/':
+      return num1 / num2;
+    default:
+      return 'Invalid operator';
+  }
+}
+
+
+var operator = prompt('Enter an operator (+, -, *, /):');
+var number1 = parseFloat(prompt('Enter the first number:'));
+var number2 = parseFloat(prompt('Enter the second number:'));
+
+
+var result = calculator(operator, number1, number2);
+
+console.log('Result:', result);
