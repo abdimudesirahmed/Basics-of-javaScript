@@ -1,0 +1,29 @@
+var rows = parseInt(prompt("Enter the number of rows for the matrix:"));
+var columns = parseInt(prompt("Enter the number of columns for the matrix:"));
+var matrix = [];
+for (var i = 0; i < rows; i++) {
+  matrix[i] = [];
+  for (var j = 0; j < columns; j++) {
+    var value = parseInt(prompt("Enter the value for cell (" + i + ", " + j + "):"));
+    matrix[i][j] = value;
+  }
+}
+
+console.log("Matrix:");
+for (var i = 0; i < rows; i++) {
+  var rowString = "";
+  for (var j = 0; j < columns; j++) {
+    rowString += matrix[i][j] + " ";
+  }
+  console.log(rowString);
+}
+
+
+var sum = 0;
+for (var i = 0; i < rows; i++) {
+  for (var j = 0; j < columns; j++) {
+    sum += matrix[i][j];
+  }
+}
+
+console.log("Sum of all elements:", sum);
