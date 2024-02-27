@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Example</title>
+</head>
+<body>
+  <div id="demo">
+    <h1>DOM Example</h1>
+  </div>
+
+  <script>
+    // JavaScript code here
+    const demoElement = document.getElementById('demo');
+
+    // Create a new paragraph element
+    const paragraph = document.createElement('p');
+    paragraph.textContent = 'DOM is working!';
+
+    // Create a new button element
+    const button = document.createElement('button');
+    button.textContent = 'Click Me';
+    button.addEventListener('click', function() {
+      alert('Button clicked!');
+    });
+
+    // Append the elements to the demo div
+    demoElement.appendChild(paragraph);
+    demoElement.appendChild(button);
+  </script>
+</body>
+</html>
