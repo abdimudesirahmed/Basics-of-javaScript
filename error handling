@@ -1,0 +1,27 @@
+function divideNumbers() {
+  try {
+    const dividend = parseFloat(prompt('Enter the dividend:'));
+    const divisor = parseFloat(prompt('Enter the divisor:'));
+
+    if (isNaN(dividend) || isNaN(divisor)) {
+      throw new Error('Invalid input: Please enter numeric values.');
+    }
+
+    if (divisor === 0) {
+      throw new Error('Division by zero is not allowed.');
+    }
+
+    return dividend / divisor;
+  } catch (error) {
+    console.error('An error occurred: ' + error);
+    return null;
+  }
+}
+
+const result = divideNumbers();
+
+if (result !== null) {
+  console.log(`Result: ${result}`);
+} else {
+  console.log('Invalid operation.');
+}
