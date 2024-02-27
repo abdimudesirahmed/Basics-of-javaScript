@@ -1,0 +1,32 @@
+function calculateTotalCost(products) {
+  let totalCost = 0;
+  for (let i = 0; i < products.length; i++) {
+    const { price, quantity } = products[i];
+
+    
+    const productCost = price * quantity;
+    totalCost += productCost;
+  }
+  return totalCost;
+}
+
+
+function calculateVAT(totalCost, vatRate) {
+  const vatAmount = totalCost * vatRate / 100;
+  return vatAmount;
+}
+
+const numProducts = parseInt(prompt('Enter the number of products:'), 10);
+
+const products = [];
+for (let i = 0; i < numProducts; i++) {
+  const productName = prompt(`Enter the name of product ${i + 1}:`);
+  const productCost = parseFloat(prompt(`Enter the cost of product ${i + 1}:`));
+  products.push({ name: productName, price: productCost, quantity: 1 });
+}
+
+const totalCost = calculateTotalCost(products);
+const vatRate = 15;
+const vatAmount = calculateVAT(totalCost, vatRate);
+const totalCostIncludingVAT = totalCost + vatAmount;
+alert(`Total cost: $${totalCost.toFixed(2)}\nVAT (${vatRate}%): $${vatAmount.toFixed(2)}\nTotal cost including VAT: $${totalCostIncludingVAT.toFixed(2)}`);
