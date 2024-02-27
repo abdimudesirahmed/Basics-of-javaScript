@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling Example</title>
+</head>
+<body>
+  <button id="myButton">Click Me</button>
+
+  <script>
+    
+    const button = document.getElementById('myButton');
+    function handleClick() {
+      button.textContent = 'Clicked!';
+      button.style.backgroundColor = 'green';
+    }
+    button.addEventListener('click', handleClick);
+  </script>
+</body>
+</html>
