@@ -1,0 +1,45 @@
+function promptProductDetails() {
+  const name = prompt('Enter the name of the product:');
+  const price = parseFloat(prompt('Enter the price of the product:'));
+  const quantity = parseInt(prompt('Enter the quantity of the product:'), 10);
+  const type = prompt('Enter the type of the product:');
+
+  const product = {
+    name: name,
+    price: price,
+    quantity: quantity,
+    type: type
+  };
+
+  return product;
+}
+
+function saveProductsToFile(products) {
+  const data = JSON.stringify(products, null, 2);
+
+  const link = document.createElement('a');
+  link.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
+  link.download = 'store.json';
+  link.click();
+}
+
+function printProductNumbersAndTypes(products) {
+  console.log('Number of products:', products.length);
+  console.log('Product numbers and types:');
+  products.forEach((product, index) => {
+    console.log(`Product ${index + 1}: ${product.type}`);
+  });
+}
+
+const numProducts = parseInt(prompt('Enter the number of products:'), 10);
+const products = [];
+
+for (let i = 0; i < numProducts; i++) {
+  console.log(`\nProduct ${i + 1}:`);
+  const product = promptProductDetails();
+  products.push(product);
+}
+
+saveProductsToFile(products);
+
+printProductNumbersAndTypes(products);
