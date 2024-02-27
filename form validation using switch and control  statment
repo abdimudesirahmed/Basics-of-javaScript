@@ -1,0 +1,21 @@
+var username = prompt("Enter your username:");
+var password = prompt("Enter your password:");
+var confirmPassword = prompt("Confirm your password:");
+
+var errorMessage;
+switch (true) {
+  case (username.trim() === ""):
+    errorMessage = "Username cannot be empty";
+    break;
+  case (password.trim() === ""):
+    errorMessage = "Password cannot be empty";
+    break;
+  case (password !== confirmPassword):
+    errorMessage = "Passwords do not match";
+    break;
+  default:
+    console.log("Registration successful!");
+}
+if (errorMessage) {
+  console.log("Error:", errorMessage);
+}
