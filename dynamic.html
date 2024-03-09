@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      label {
+        font-size: 14px;
+        padding: 4px;
+      }
+      input {
+        padding: 2px;
+        margin: 4px 0px;
+      }
+      .error-msg {
+        color: red;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" />
+      <p id="usernameError" class="error-msg"></p>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" />
+      <p id="passwordError" class="error-msg"></p>
+      <button onclick="showPasswordClick()" id="showButton">
+        show password
+      </button>
+    </div>
+    <div>
+      <button id="submit">Submit</button>
+    </div>
+
+    <div style="margin-top: 20px">
+      <table>
+        <thead>
+          <th>Username</th>
+          <th>password</th>
+          <th>action</th>
+        </thead>
+        <tbody id="tableBody">
+          <tr id="1">
+            <td id="1Username">Abdulj</td>
+            <td>pass123</td>
+            <td>
+              <button
+                style="
+                  background-color: white;
+                  color: black;
+                  padding: 2px;
+                  margin: 2px;
+                "
+              >
+                Edit
+              </button>
+              <button
+                style="
+                  background-color: red;
+                  color: white;
+                  padding: 2px;
+                  margin: 2px;
+                "
+                onclick="deleteItem('1')"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const showButton = document.getElementById("showButton");
+      const passwordInput = document.getElementById("password");
+      const usernameInput = document.getElementById("username");
+
+      const usernameError = document.getElementById("usernameError");
+      const passwordError = document.getElementById("passwordError");
+
+      const tableBody = document.getElementById("tableBody");
+      let isValid = false;
+      let id = 2;
+      let isEdit = false;
+      let activeId = 2;
+
+      function deleteItem(id) {
+        const item = document.getElementById(id);
+        item.remove();
+      }
+
+      function editItem(id) {
+        isEdit = true;
+        activeId = id;
+        const itemUser = document.getElementById(id + "username");
+        const itemPass = document.getElementById(id + "password");
+        usernameInput.value = itemUser;
+        passwordInput.value = itemPass;
+      }
+
+      function submitData() {
+        console.log("form is valid ", tableBody.innerHTML);
+        tableBody.innerHTML += `
+            <tr id='${id}'>
+                <td id='${id}username'>${usernameInput.value}</td>
+                <td>${passwordInput.value}</td>
+                <td>
+                    <button style="background-color: white; color: black; padding:2px; margin: 2px;">Edit</button>
+                    <button style="background-color: red; color: white; padding:2px; margin: 2px;" onclick="deleteItem('${id}')">Delete</button>
+                </td>
+            </tr>
+        `;
+        usernameInput.value = "";
+        passwordInput.value = "";
+        id++;
+      }
+
+      function editSubmitData() {
+         const itemUser = document.getElementById(activeId + "Username");
+         const itemPass = document.getElementById(activeId).getElementsByTagName("td")[1];
+         itemUser.innerText = usernameInput.value;
+         itemPass.innerText = passwordInput.value; isEdit = false;
+         activeId = 2;
+       
+         usernameInput.value = "";
+         passwordInput.value = "";
+      
+        data.innerHTML  = `
+        <td id='${id}username'>${usernameInput.value}</td>
+                <td>${passwordInput.value}</td>
+                <td>
+                    <button style="background-color: white; color: black; padding:2px; margin: 2px;">Edit</button>
+                    <button style="background-color: red; color: white; padding:2px; margin: 2px;" onclick="deleteItem('${id}')">Delete</button>
+                </td>
+        `
+      }
+
+      usernameInput.addEventListener("keyup", (event) => {
+        console.log("text : ", usernameInput.value);
+        if (usernameInput.value.length < 4) {
+          isValid = false;
+          usernameError.innerText = "username must be greater than 4 character";
+        } else {
+          isValid = true;
+          usernameError.innerText = "";
+        }
+      });
+
+      passwordInput.addEventListener("keyup", (event) => {
+        console.log("text : ", passwordInput.value);
+        if (passwordInput.value.length < 4) {
+          isValid = false;
+          passwordError.innerText = "password must be greater than 4 character";
+        } else {
+          isValid = true;
+          passwordError.innerText = "";
+        }
+      });
+
+      document.getElementById("submit").addEventListener("click", (event) => {
+        console.log("inValid : ", isValid);
+        if (isValid) {
+          if (isEdit) {
+            editSubmitData();
+            return;
+          }
+          submitData();
+        }
+      });
+
+      function showPasswordClick() {
+        const buttonText = showButton.innerText;
+        if (buttonText == "show password") {
+          passwordInput.type = "text";
+          showButton.innerText = "hide password";
+        } else {
+          passwordInput.type = "password";
+          showButton.innerText = "show password";
+        }
+      }
+    </script>
+  </body>
+</html>
